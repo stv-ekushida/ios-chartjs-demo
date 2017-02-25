@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>最新3つの折れ線グラフ</title>
+<title>折れ線グラフ</title>
 <style>
     #wrapper{
         margin: 0 auto;
@@ -9,34 +9,48 @@
 
     #mycanvas{
         width: 320px;
-        height: 230px;
         color: #ffffff;
     }
 </style>
 </head>
 <body>
-<script src="./Chart.js"></script>
+<script src="./Chart.min.js"></script>
 <script>
-function drawLineChart(labels, datesets){
-    lineChartData = {
-        labels : labels,
-        datasets : [
-            {
-                label: "最新データ3件",
-            	fillColor: "rgba(151,187,205,0.2)",
-            	strokeColor: "rgba(151,187,205,1)",
-            	pointColor: "rgba(151,187,205,1)",
-            	pointStrokeColor: "#fff",
-            	pointHighlightFill: "#fff",
-            	pointHighlightStroke: "rgba(220,220,220,1)",
-                data :datesets
-            }
-        ]
-    }
+function drawLineChart(labels, data){
     
-    //アニメーション処理を記述
-    ctx = document.getElementById("mycanvas").getContext("2d");
-    window.myLine = new Chart(ctx).Line(lineChartData,{responsive : true});
+    var data = {
+        labels: labels,
+        datasets: [
+                {
+                   label: "血圧（上）",
+                   fill: false,
+                   lineTension: 0.1,
+                   backgroundColor: "rgba(75,192,192,0.4)",
+                   borderColor: "rgba(75,192,192,1)",
+                   borderCapStyle: 'butt',
+                   borderDash: [],
+                   borderDashOffset: 0.0,
+                   borderJoinStyle: 'miter',
+                   pointBorderColor: "rgba(75,192,192,1)",
+                   pointBackgroundColor: "#fff",
+                   pointBorderWidth: 1,
+                   pointHoverRadius: 5,
+                   pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                   pointHoverBorderColor: "rgba(220,220,220,1)",
+                   pointHoverBorderWidth: 2,
+                   pointRadius: 1,
+                   pointHitRadius: 10,
+                   data: data,
+                   spanGaps: false,
+                }
+        ]
+    };
+
+    var ctx = document.getElementById("mycanvas").getContext("2d");
+    var myLineChart = Chart.Line(ctx, {
+                                 data: data,
+                                 });    
+    window.myLine = myLineChart;
 }
 </script>
 <div id="wrapper">

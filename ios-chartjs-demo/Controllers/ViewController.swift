@@ -12,8 +12,9 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var webView: UIWebView!
     
-    let labels  = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"]
-    let data = [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56]
+    let labels  = ["1月","2月","3月","4月","5月","6月"]
+    let data = [165, 159, 180, 181, 156, 155, 140, 165]
+
     var chartType = ChartType.line
     
     override func viewDidLoad() {

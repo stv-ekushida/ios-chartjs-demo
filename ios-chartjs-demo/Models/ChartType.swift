@@ -30,5 +30,5 @@ enum ChartType {
         case .line:
             return "drawLineChart(\(labels),\(data));"
         }
-    }
+    }    
 }
