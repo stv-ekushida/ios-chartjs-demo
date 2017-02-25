@@ -16,40 +16,46 @@
 <body>
 <script src="./Chart.min.js"></script>
 <script>
-function drawLineChart(labels, data){
-    
-    var data = {
-        labels: labels,
-        datasets: [
-                {
-                   label: "血圧（上）",
-                   fill: false,
-                   lineTension: 0.1,
-                   backgroundColor: "rgba(75,192,192,0.4)",
-                   borderColor: "rgba(75,192,192,1)",
-                   borderCapStyle: 'butt',
-                   borderDash: [],
-                   borderDashOffset: 0.0,
-                   borderJoinStyle: 'miter',
-                   pointBorderColor: "rgba(75,192,192,1)",
-                   pointBackgroundColor: "#fff",
-                   pointBorderWidth: 1,
-                   pointHoverRadius: 5,
-                   pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                   pointHoverBorderColor: "rgba(220,220,220,1)",
-                   pointHoverBorderWidth: 2,
-                   pointRadius: 1,
-                   pointHitRadius: 10,
-                   data: data,
-                   spanGaps: false,
-                }
-        ]
+function drawLineChart(xaxis, data, precedent){
+
+    var datasets = []
+
+    for(var i=0; i < data.length; i++ ) {
+        
+        var item = {
+            label: precedent[i],
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(75,192,192,0.4)",
+            borderColor: "rgba(75,192,192,1)",
+            borderCapStyle: 'round', // butt / square / round
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',  // miter / bevel / round
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: data[i],
+            spanGaps: false,
+        }
+        datasets.push(item)
+    }
+
+    var chartdata = {
+        labels: xaxis,
+        datasets: datasets
     };
 
     var ctx = document.getElementById("mycanvas").getContext("2d");
     var myLineChart = Chart.Line(ctx, {
-                                 data: data,
-                                 });    
+                                 data: chartdata,
+                                 });
     window.myLine = myLineChart;
 }
 </script>

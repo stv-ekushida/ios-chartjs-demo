@@ -10,11 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var webView: UIWebView!
-    
-    let labels  = ["1月","2月","3月","4月","5月","6月"]
-    let data = [165, 159, 180, 181, 156, 155, 140, 165]
-
+    @IBOutlet weak var webView: UIWebView!    
     var chartType = ChartType.line
     
     override func viewDidLoad() {
@@ -49,11 +45,16 @@ class ViewController: UIViewController {
 extension ViewController: UIWebViewDelegate {
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
+        
+        if webView.isLoading { return }
         renderGraph()
     }
     
     private func renderGraph() {
-        webView.stringByEvaluatingJavaScript(from: chartType.query(labels: labels, data: data))
+        webView.stringByEvaluatingJavaScript(
+            from: chartType.query(xaxis: chartType.xaxis(),
+                                  data: chartType.data(),
+                                  precedent: chartType.precedent()))
     }    
 }
 
