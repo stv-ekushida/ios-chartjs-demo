@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>カロリーBest3</title>
+<title>棒グラフ</title>
 <style>
     #wrapper{
         margin: 0 auto;
@@ -9,32 +9,47 @@
 
     #mycanvas{
         width: 320px;
-        height: 230px;
         color: #ffffff;
     }
 </style>
 </head>
 <body>
-<script src="./Chart.js"></script>
+<script src="./Chart.min.js"></script>
 <script>
-function drawBarChart(labels, datasest){
+function drawBarChart(labels, data){
     
-    barChartData = {
-        labels : labels,
-        datasets : [
-            {
-                label: "最新データ3件",
-                fillColor : "rgba(220,220,220,0.5)",
-                strokeColor : "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
-                data :datasest
-            }
+    var data = {
+        labels: labels,
+        datasets: [
+                {
+                   label: "血圧（上）",
+                   backgroundColor: [
+                                     'rgba(255, 99, 132, 0.2)',
+                                     'rgba(54, 162, 235, 0.2)',
+                                     'rgba(255, 206, 86, 0.2)',
+                                     'rgba(75, 192, 192, 0.2)',
+                                     'rgba(153, 102, 255, 0.2)',
+                                     'rgba(255, 159, 64, 0.2)'
+                                     ],
+                   borderColor: [
+                                 'rgba(255,99,132,1)',
+                                 'rgba(54, 162, 235, 1)',
+                                 'rgba(255, 206, 86, 1)',
+                                 'rgba(75, 192, 192, 1)',
+                                 'rgba(153, 102, 255, 1)',
+                                 'rgba(255, 159, 64, 1)'
+                                 ],
+                   borderWidth: 1,
+                   data: data[0],
+                }
         ]
-    }
+    };
     
-    ctx = document.getElementById("mycanvas").getContext("2d");
-    window.myBar = new Chart(ctx).Bar(barChartData,{data : true});
+    var ctx = document.getElementById("mycanvas").getContext("2d");
+    window.myBar = new Chart(ctx, {
+                             type: 'bar',       // horizontalBar
+                             data: data,
+                             });
 }
 </script>
 <div id="wrapper">

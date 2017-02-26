@@ -12,6 +12,7 @@ enum ChartType {
     case bar
     case line
     
+    /// ファイル名
     func fileName() -> String {
         
         switch self {
@@ -22,13 +23,32 @@ enum ChartType {
         }
     }
     
-    func query(labels: [String], data: [Int]) -> String {
+    /// JSのメソッドを呼ぶ
+    func query(xaxis: [String], data: [[Int]], precedent: [String]) -> String {
      
         switch self {
         case .bar:
-            return "drawBarChart(\(labels),\(data));"
+            return "drawBarChart(\(xaxis),\(data));"
         case .line:
-            return "drawLineChart(\(labels),\(data));"
+            return "drawLineChart(\(xaxis),\(data),\(precedent));"
         }
+    }
+    
+    /// X軸のタイトル
+    func xaxis() -> [String] {
+        return ["1月","2月","3月","4月","5月","6月"]
+    }
+    
+    /// データ
+    func data() -> [[Int]] {
+        return [
+            [165, 159, 180, 181, 156, 155],
+            [65, 59, 80, 81, 56, 55]
+        ]
+    }
+    
+    /// 判例
+    func precedent() -> [String] {
+        return ["血圧(上）","血圧(下）"]
     }
 }
